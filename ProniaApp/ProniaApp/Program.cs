@@ -1,15 +1,32 @@
-namespace ProniaApp
+using Microsoft.EntityFrameworkCore;
+using ProniaApp.DAL;
+
+namespace ProniaApp;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-            var app = builder.Build();
+        var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddControllersWithViews();
+        builder.Services.AddDbContext<AppDbContext>(ops =>
+            ops.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
+        );
+        var app = builder.Build();
 
-            app.MapGet("/", () => "Hello World!");
+        app.UseStaticFiles();
+        // home/index
+        app.MapControllerRoute(
+            name: "admin",
+            pattern: "{area:exists}/{controller=home}/{action=index}/{id?}"
+        );
 
-            app.Run();
-        }
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=home}/{action=index}/{id?}"
+        );
+
+
+        app.Run();
     }
 }

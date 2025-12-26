@@ -1,0 +1,82 @@
+﻿@using ProniaApp.Models
+
+@model Category
+
+<!-- ================= CATEGORY OVERVIEW ================= -->
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Category Overview</h4>
+
+                <div class="d-flex flex-wrap justify-content-between text-center">
+
+                    <div class="p-3">
+                        <i class="mdi mdi-tag-outline icon-lg text-primary"></i>
+                        <p class="mb-1 text-muted">Category Name</p>
+                        <h5>@Model.Name</h5>
+                    </div>
+
+                    <div class="p-3">
+                        <i class="mdi mdi-package-variant icon-lg text-success"></i>
+                        <p class="mb-1 text-muted">Product Count</p>
+                        <h5>@(Model.Products?.Count ?? 0)</h5>
+                    </div>
+
+                    <div class="p-3">
+                        <i class="mdi mdi-delete-outline icon-lg text-danger"></i>
+                        <p class="mb-1 text-muted">Deleted</p>
+                        <h5>@Model.IsDeleted</h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= PRODUCT LIST ================= -->
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Products in this Category</h4>
+
+                @if (Model.Products != null && Model.Products.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int count = 1;
+                                }
+                                @foreach (var product in Model.Products)
+                                {
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@product.Name</td>
+                                        <td>@product.Price</td>
+                                    </tr>
+                                    count++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info mb-0">
+                        No products found for this category.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

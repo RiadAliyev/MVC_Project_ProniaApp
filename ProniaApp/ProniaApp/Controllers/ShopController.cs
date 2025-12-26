@@ -33,7 +33,11 @@ public class ShopController : Controller
         {
             return NotFound();
         }
-        List<Product> relatedProducts = _context.Products.Where(p => p.CategoryId == product.CategoryId && p.Id != id).Take(8).ToList();
+        List<Product> relatedProducts = _context.Products
+            .Include(p => p.ProductImages)
+            .Where(p => p.CategoryId == product.CategoryId && p.Id != id)
+            .Take(8)
+            .ToList();
 
         DetailVM detailVM = new DetailVM
         {
