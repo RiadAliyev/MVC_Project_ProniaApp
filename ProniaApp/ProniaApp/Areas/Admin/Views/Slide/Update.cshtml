@@ -1,0 +1,44 @@
+﻿@using ProniaApp.Areas.Admin.ViewModels.Slide
+@model UpdateSlideVM
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Slide</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <img src="~/assets/images/website-images/@Model.Image" alt="">
+                        <input type="text" asp-for="Image" hidden>
+                    </div>
+                    <div class="form-group">
+                        <label for="Photo">Image</label>
+                        <input asp-for="Photo" class="form-control" accept="image/*" placeholder="Image">
+                        <span asp-validation-for="Photo" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Title">Title</label>
+                        <input asp-for="Title" class="form-control" placeholder="Title">
+                        <span asp-validation-for="Title" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Discount">Discount</label>
+                        <input asp-for="Discount" class="form-control" placeholder="Discount">
+                        <span asp-validation-for="Discount" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Order">Order</label>
+                        <input asp-for="Order" class="form-control" placeholder="Order">
+                        <span asp-validation-for="Order" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea asp-for="Description" class="form-control" placeholder="Description"></textarea>
+                        <span asp-validation-for="Description" style="color:red"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
